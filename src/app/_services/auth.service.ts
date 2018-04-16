@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {Router, ActivatedRoute} from '@angular/router';
+import { environment } from '../env/environment';
 
 @Injectable()
 export class AuthService {
-  baseUrl = 'http://localhost:5000/api/auth/';
+  baseUrl = environment.apiUrl + 'auth/';
   userToken: any;
   constructor(private http: Http, private route: ActivatedRoute, private router: Router) {}
   headers = new Headers({ 'Content-type': 'application/json' });

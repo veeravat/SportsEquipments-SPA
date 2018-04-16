@@ -17,6 +17,7 @@ import { EquipmentsComponent } from './equipments/equipments.component';
 import { AuthService } from './_services/auth.service';
 import { UsersService } from './_services/users.service';
 import { RentComponent } from './rent/rent.component';
+import { EquipmentService } from './_services/equipment.service';
 
 
 
@@ -40,7 +41,8 @@ import { RentComponent } from './rent/rent.component';
   ],
   providers: [
     AuthService,
-    UsersService
+    UsersService,
+    EquipmentService
   ],
   bootstrap: [AppComponent]
 })

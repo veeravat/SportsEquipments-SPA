@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UsersService } from '../_services/users.service';
+import { EquipmentService } from '../_services/equipment.service';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-rent',
@@ -11,13 +13,25 @@ export class RentComponent implements OnInit {
   SIDText: any = 'Please input 10 digit student ID';
   SIDVAL = '';
   Fullname = '';
-  constructor(private usersService: UsersService) {}
+  equipments: any = {};
+  dtTrigger: Subject<any> = new Subject();
+  user: any = {};
+  constructor(
+    private usersService: UsersService,
+    private equipmentService: EquipmentService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.equipmentService.getEquipments().subscribe(data => {
+      this.equipments = data;
+      this.dtTrigger.next();
+    }, error => {
+      console.log(error);
+    });
+  }
 
   idSearch(input) {
     const text: string = input.value;
-    console.log(text.length);
     if (input.value.length < 10) {
       this.SIDVAL = input.value;
       this.SIDState = 'has-warning';
@@ -30,6 +44,7 @@ export class RentComponent implements OnInit {
       this.usersService.getUser(text).subscribe(
         data => {
           if (data) {
+            this.user = data;
             this.setData(data);
           } else {
             this.SIDText = 'User not found in database please register [here]';

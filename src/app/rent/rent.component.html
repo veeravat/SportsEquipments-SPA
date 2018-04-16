@@ -22,13 +22,13 @@
               <p class="help-block">{{SIDText}}</p>
             </div>
 
-            <div *ngIf="!Fullname" class="panel panel-info">
+            <div *ngIf="Fullname" class="panel panel-info">
               <div class="panel-heading">
                 <h3 class="panel-title">User Detail</h3>
               </div>
               <div class="panel-body">
                 <p>Name : {{Fullname}}</p>
-                <p>Telephone : </p>
+                <p>Telephone : {{user.telephone}}</p>
               </div>
             </div>
 
@@ -48,18 +48,11 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td style="vertical-align: middle;">Ping-pong bat </td>
-                  <td style="vertical-align: middle;">10</td>
+                <tr *ngFor="let equipment of equipments">
+                  <td style="vertical-align: middle;">{{equipment.e_name}}</td>
+                  <td style="vertical-align: middle;">{{equipment.e_amount}}</td>
                   <td style="vertical-align: middle;">
-                    <button [disabled]="!Fullname" type="button" class="btn btn-success btn-sm">Rent</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="vertical-align: middle;">Ping-pong Ball </td>
-                  <td style="vertical-align: middle;">10</td>
-                  <td style="vertical-align: middle;">
-                    <button [disabled]="!Fullname" type="button" class="btn btn-success btn-sm">Rent</button>
+                    <button [disabled]="!Fullname || equipment.e_amount <= 0" type="button" class="btn btn-success btn-sm">Rent</button>
                   </td>
                 </tr>
               </tbody>

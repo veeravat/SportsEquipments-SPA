@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
-
+import { environment } from '../env/environment';
 @Injectable()
 export class UsersService {
-  baseUrl = 'http://localhost:5000/api/users';
+  baseUrl = environment.apiUrl + 'users/';
   user: any;
   constructor(private http: Http) {}
 
