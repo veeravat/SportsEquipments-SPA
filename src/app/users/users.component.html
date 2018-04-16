@@ -15,7 +15,7 @@
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <table datatable width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <table datatable="ng" [dtTrigger]="dtTrigger" width="100%" class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -26,19 +26,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1580701074</td>
-                            <td>veeravat jeensuksang</td>
-                            <td>veeravat@me.com</td>
-                            <td>080-278-8536</td>
+                        <tr *ngFor="let user of users">
+                            <td>{{user.studentId}}</td>
+                            <td>{{user.firstname}} {{user.lastname}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.telephone}}</td>
                             <td>EDIT</td>
-                        </tr>
-                        <tr>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td class="center">5</td>
-                            <td class="center">C</td>
                         </tr>
                     </tbody>
                 </table>
@@ -51,78 +44,131 @@
     <!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
-<div class="modal fade" id="AddUser">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Add new user</h4>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="#">
-                    <div class="form-group">
-                        <label for="name" class="cols-sm-2 control-label">Your Name</label>
+
+<form #registerForm="ngForm">
+    <div class="modal fade" id="AddUser">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Add new user</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group col-md-6 col-sm-12">
+                        <label for="name" class="cols-sm-2 control-label">Your Firstname</label>
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="fa fa-user fa" aria-hidden="true"></i>
                                 </span>
-                                <input type="text" class="form-control" name="name" id="name" placeholder="Enter your Name" />
+                                <input type="text" class="form-control" required [(ngModel)]="model.Firstname" name="Firstname" id="Firstname" placeholder="Firstname"
+                                />
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-6 col-sm-12">
+                        <label for="name" class="cols-sm-2 control-label">Your Lastname</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-user fa" aria-hidden="true"></i>
+                                </span>
+                                <input type="text" class="form-control" [(ngModel)]="model.Lastname" name="Lastname" id="Lastname" placeholder="Lastname"
+                                    required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
                         <label for="email" class="cols-sm-2 control-label">Your Email</label>
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="fa fa-envelope fa" aria-hidden="true"></i>
                                 </span>
-                                <input type="text" class="form-control" name="email" id="email" placeholder="Enter your Email" />
+                                <input type="text" class="form-control" required [(ngModel)]="model.Email" name="Email" id="Email" placeholder="Enter your Email"
+                                />
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-sm-12">
                         <label for="username" class="cols-sm-2 control-label">Username</label>
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="fa fa-users fa" aria-hidden="true"></i>
                                 </span>
-                                <input type="text" class="form-control" name="username" id="username" placeholder="Enter your Username" />
+                                <input type="text" class="form-control" required [(ngModel)]="model.Username" name="Username" id="Username" placeholder="Enter your Username"
+                                />
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-sm-12">
+                        <label for="username" class="cols-sm-2 control-label">Student ID</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-users fa" aria-hidden="true"></i>
+                                </span>
+                                <input type="text" class="form-control" required [(ngModel)]="model.StudentId" name="StudentId" id="StudentId" placeholder="Enter StudentId"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label for="username" class="cols-sm-2 control-label">Telephone Number</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-users fa" aria-hidden="true"></i>
+                                </span>
+                                <input type="text" class="form-control" required [(ngModel)]="model.Telephon" name="Telephon" id="Telephon" placeholder="Enter Telephone Number"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label for="username" class="cols-sm-2 control-label">Faculty</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-suitcase fa" aria-hidden="true"></i>
+                                </span>
+
+                                <select [(ngModel)]="model.faculty" name="faculty" id="faculty" class="form-control" required>
+                                    <option value="" disabled selected>Select your Faculty</option>
+                                    <option *ngFor="let item of faculty; let myIndex = index" value="{{item}}">{{item}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
                         <label for="password" class="cols-sm-2 control-label">Password</label>
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
                                 </span>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Enter your Password" />
+                                <input type="password" [(ngModel)]="model.Password" class="form-control" name="password" id="password" placeholder="Enter your Password"
+                                />
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-sm-12">
                         <label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
                                 </span>
-                                <input type="password" class="form-control" name="confirm" id="confirm" placeholder="Confirm your Password" />
+                                <input type="password" [(ngModel)]="model.Passwordchk" class="form-control" name="confirm" id="confirm" placeholder="Confirm your Password"
+                                />
                             </div>
                         </div>
                     </div>
-                </form>
-
-            </div>
-            <div class="modal-footer">
-                <div class="form-group ">
-                    <button type="button" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+                    <button data-dismiss="modal" [disabled]="!registerForm.valid || model.Password != model.Passwordchk || model.Password.length < 4" type="button" class="btn btn-primary btn-lg btn-block login-button"
+                        (click)="register()">Register</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</form>

@@ -14,6 +14,10 @@ import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { UsersComponent } from './users/users.component';
 import { EquipmentsComponent } from './equipments/equipments.component';
+import { AuthService } from './_services/auth.service';
+import { UsersService } from './_services/users.service';
+import { RentComponent } from './rent/rent.component';
+
 
 
 @NgModule({
@@ -23,7 +27,8 @@ import { EquipmentsComponent } from './equipments/equipments.component';
     LoginPageComponent,
     HomeComponent,
     UsersComponent,
-    EquipmentsComponent
+    EquipmentsComponent,
+    RentComponent
 ],
   imports: [
     BrowserModule,
@@ -33,7 +38,10 @@ import { EquipmentsComponent } from './equipments/equipments.component';
     BrowserAnimationsModule,
     DataTablesModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    UsersService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
