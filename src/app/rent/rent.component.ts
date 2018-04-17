@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { UsersService } from '../_services/users.service';
 import { EquipmentService } from '../_services/equipment.service';
 import { Subject } from 'rxjs/Subject';
+import {Router, ActivatedRoute} from '@angular/router';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-rent',
@@ -17,10 +19,29 @@ export class RentComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   user: any = {};
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private authService: AuthService,
     private usersService: UsersService,
     private equipmentService: EquipmentService
   ) {}
-
+  faculty = [
+    'คณะบัญชี',
+    'คณะบริหารธุรกิจ',
+    'คณะนิเทศศาสตร์',
+    'คณะนิติศาสตร์',
+    'คณะมนุษยศาสตร์ และการจัดการการท่องเที่ยว',
+    'คณะเศรษฐศาสตร์และการลงทุน',
+    'คณะเทคโนโลยีสารสนเทศและนวัตกรรม',
+    'คณะศิลปกรรมศาสตร์',
+    'คณะวิศวกรรมศาสตร์',
+    'คณะสถาปัตยกรรมศาสตร์',
+    'คณะการสร้างเจ้าของธุรกิจ และการบริหารกิจการ',
+    'คณะดิจิทัลมีเดียและศิลปะภาพยนตร์',
+    'วิทยาลัยนานาชาติ',
+    'วิทยาลัยนานาชาติจีน'
+];
+model: any = {};
   ngOnInit() {
     this.equipmentService.getEquipments().subscribe(data => {
       this.equipments = data;
@@ -47,7 +68,7 @@ export class RentComponent implements OnInit {
             this.user = data;
             this.setData(data);
           } else {
-            this.SIDText = 'User not found in database please register [here]';
+            this.SIDText = 'User not found in database please register';
             this.SIDState = 'has-error';
           }
         },
@@ -64,5 +85,20 @@ export class RentComponent implements OnInit {
   setData(data) {
     this.SIDText = 'Found this user';
     this.Fullname = data.firstname + ' ' + data.lastname;
+  }
+  register() {
+    console.log(this.model);
+    this.authService.register(this.model).subscribe(data => {
+      console.log('logged in Successfully');
+      this.router.navigateByUrl('/home', {skipLocationChange: true}).then(() =>
+      this.router.navigate(['rent']));
+    }, error => {
+      console.log('failed to login');
+      this.router.navigateByUrl('/home', {skipLocationChange: true}).then(() =>
+      this.router.navigate(['rent']));
+    });
+  }
+  rent(id: any) {
+
   }
 }
