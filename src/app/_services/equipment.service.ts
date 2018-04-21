@@ -30,4 +30,25 @@ export class EquipmentService {
       .map((response: Response) => {
       });
   }
+  rentEquipment(model: any) {
+    // console.log(model);
+    return this.http
+      .post(this.baseUrl + 'rent', model, this.options)
+      .map((response: Response) => {
+      });
+  }
+
+  getRent() {
+    return this.http.get(this.baseUrl + 'inuse', this.options).map((response: Response) => {
+      return response.json();
+    });
+  }
+
+  return(model: any) {
+    console.log(model);
+    return this.http
+    .post(this.baseUrl + 'return', model.Rent_ID, this.options)
+    .map((response: Response) => {
+    });
+  }
 }

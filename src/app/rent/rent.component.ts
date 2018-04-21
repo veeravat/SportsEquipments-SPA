@@ -11,6 +11,7 @@ import { AuthService } from '../_services/auth.service';
   styleUrls: ['./rent.component.css']
 })
 export class RentComponent implements OnInit {
+
   SIDState = '';
   SIDText: any = 'Please input 10 digit student ID';
   SIDVAL = '';
@@ -18,6 +19,8 @@ export class RentComponent implements OnInit {
   equipments: any = {};
   dtTrigger: Subject<any> = new Subject();
   user: any = {};
+  rentID: any;
+  dataSent: any = {};
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -43,9 +46,12 @@ export class RentComponent implements OnInit {
 ];
 model: any = {};
   ngOnInit() {
+
     this.equipmentService.getEquipments().subscribe(data => {
       this.equipments = data;
+      console.log(data);
       this.dtTrigger.next();
+
     }, error => {
       console.log(error);
     });
@@ -85,6 +91,8 @@ model: any = {};
   setData(data) {
     this.SIDText = 'Found this user';
     this.Fullname = data.firstname + ' ' + data.lastname;
+    this.dataSent.Rent_by = data.id;
+    console.log(data);
   }
   register() {
     console.log(this.model);
@@ -98,7 +106,17 @@ model: any = {};
       this.router.navigate(['rent']));
     });
   }
-  rent(id: any) {
 
+  rent(id: any) {
+    // console.log(id);
+    this.dataSent.E_ID = id;
+    this.equipmentService.rentEquipment(this.dataSent)
+    .subscribe(data => {
+      this.router.navigateByUrl('/home', {skipLocationChange: true}).then(() =>
+      this.router.navigate(['rent']));
+    }, error => {
+      this.router.navigateByUrl('/home', {skipLocationChange: true}).then(() =>
+      this.router.navigate(['rent']));
+    });
   }
 }

@@ -20,7 +20,9 @@ export class AuthService {
         if (user) {
           localStorage.setItem('token', user.tokenString);
           this.userToken = user.tokenString;
+          return true;
         }
+        return false;
       });
   }
   register(model: any) {

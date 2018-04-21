@@ -29,12 +29,12 @@
                     <tbody>
                         <tr *ngFor="let equipment of equipments">
                             <td>{{equipment.e_name}}</td>
-                            <td style="text-align: center"> </td>
-                            <td style="text-align: center"> </td>
+                            <td style="text-align: center">{{equipment.e_used}}</td>
+                            <td style="text-align: center">{{equipment.e_resv}}</td>
                             <td style="text-align: center">{{equipment.e_amount}}</td>
                             <td style="text-align: center">{{equipment.e_total}}</td>
                             <td style="text-align: center">
-                                <button (click)="setID(equipment)" data-toggle="modal" href='#edit-equipment' type="button" class="btn btn-success btn-sm">Action</button>
+                                <button (click)="setID(equipment)" data-toggle="modal" href='#edit-equipment' type="button" class="btn btn-info btn-sm">Action</button>
                             </td>
                         </tr>
                     </tbody>

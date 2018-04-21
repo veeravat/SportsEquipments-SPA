@@ -18,6 +18,8 @@ import { AuthService } from './_services/auth.service';
 import { UsersService } from './_services/users.service';
 import { RentComponent } from './rent/rent.component';
 import { EquipmentService } from './_services/equipment.service';
+import { EquipInUseComponent } from './EquipInUse/EquipInUse.component';
+import { UserReserveComponent } from './userReserve/userReserve.component';
 
 
 
@@ -29,7 +31,9 @@ import { EquipmentService } from './_services/equipment.service';
     HomeComponent,
     UsersComponent,
     EquipmentsComponent,
-    RentComponent
+    RentComponent,
+    EquipInUseComponent,
+    UserReserveComponent
 ],
   imports: [
     BrowserModule,

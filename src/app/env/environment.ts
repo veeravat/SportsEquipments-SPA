@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:5000/api/',
+  apiUrl: 'https://tuymove-api.azurewebsites.net/api/',
+  // apiUrl: 'http://localhost:5000/api/',
 };
