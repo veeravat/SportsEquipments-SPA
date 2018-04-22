@@ -12,7 +12,7 @@ import * as jwt_decode from 'jwt-decode';
 export class LoginPageComponent implements OnInit {
   token = localStorage.getItem('token');
   decoded: any = {};
-  logedin = true;
+  logedin = false;
   admin = false;
   model: any = {};
 
@@ -28,6 +28,8 @@ export class LoginPageComponent implements OnInit {
     if (this.decoded.role > 0) {
       this.logedin = true;
       this.admin = true;
+    } else {
+      this.logedin = true;
     }
 
   }
@@ -36,12 +38,11 @@ export class LoginPageComponent implements OnInit {
     console.log(this.model);
     this.authService.login(this.model).subscribe(
       data => {
-        console.log(data);
+        // console.log(data);
         location.reload();
-
       },
       error => {
-        console.log('failed to login');
+        // console.log('failed to login');
         this.router
           .navigateByUrl('/home', { skipLocationChange: true })
           .then(() => this.router.navigate(['home']));

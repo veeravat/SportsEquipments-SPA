@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { environment } from '../env/environment';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class EquipmentService {
@@ -43,12 +43,38 @@ export class EquipmentService {
       return response.json();
     });
   }
+  getResv() {
+    return this.http.get(this.baseUrl + 'reserv', this.options).map((response: Response) => {
+      return response.json();
+    });
+  }
 
   return(model: any) {
-    console.log(model);
+    // console.log(model);
     return this.http
     .post(this.baseUrl + 'return', model.Rent_ID, this.options)
     .map((response: Response) => {
+    });
+  }
+
+  reserv(model: any) {
+    // console.log(model);
+    return this.http
+    .post(this.baseUrl + 'reserv', model, this.options)
+    .map((response: Response) => {
+    });
+  }
+  getResvEquipment(model: any) {
+    // console.log(model);
+    return this.http
+      .put(this.baseUrl + 'reserv', model, this.options)
+      .map((response: Response) => {
+      });
+  }
+
+  getDashboard() {
+    return this.http.get(this.baseUrl + 'dashboard', this.options).map((response: Response) => {
+      return response.json();
     });
   }
 }

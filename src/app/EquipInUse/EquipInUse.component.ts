@@ -26,7 +26,7 @@ export class EquipInUseComponent implements OnInit {
   ngOnInit() {
     this.equipmentService.getRent().subscribe(data => {
       this.inuse = data;
-      console.log(data);
+      // console.log(data);
       this.dtTrigger.next();
     }, error => {
       console.log(error);

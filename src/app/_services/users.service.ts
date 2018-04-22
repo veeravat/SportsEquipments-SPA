@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { environment } from '../env/environment';
+import { environment } from '../../environments/environment';
 @Injectable()
 export class UsersService {
   baseUrl = environment.apiUrl + 'users/';
@@ -17,7 +17,7 @@ export class UsersService {
     });
   }
   getUser(id: any) {
-    console.log(id);
+    // console.log(id);
     const headers = new Headers({ 'Content-type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
     return this.http.post(this.baseUrl, id, options).map((response: Response) => {

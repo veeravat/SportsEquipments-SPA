@@ -14,12 +14,12 @@
                         <i class="fa fa-futbol-o fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">26</div>
+                        <div class="huge">{{data.equipments}}</div>
                         <div>Equipment Available!</div>
                     </div>
                 </div>
             </div>
-            <a [routerLink]="['/equipments']" routerLinkActive="router-link-active">
+            <a [routerLink]="['/equipments']" >
                 <div class="panel-footer">
                     <span class="pull-left">Manage Equipment</span>
                     <span class="pull-right">
@@ -38,12 +38,12 @@
                         <i class="fa fa-users fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">12</div>
+                        <div class="huge">{{data.inuse}}</div>
                         <div>Item in use</div>
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a [routerLink]="['/inuse']">
                 <div class="panel-footer">
                     <span class="pull-left">View Details</span>
                     <span class="pull-right">
@@ -62,12 +62,12 @@
                         <i class="fa fa-calendar fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">5</div>
+                        <div class="huge">{{data.resv}}</div>
                         <div>Reservation</div>
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a [routerLink]="['/rent']">
                 <div class="panel-footer">
                     <span class="pull-left">View Details</span>
                     <span class="pull-right">
@@ -86,12 +86,12 @@
                         <i class="fa fa-calendar-times-o fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">13</div>
+                        <div class="huge">{{data.overdue}}</div>
                         <div>Overdue</div>
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a [routerLink]="['/rent']">
                 <div class="panel-footer">
                     <span class="pull-left">View Details</span>
                     <span class="pull-right">
