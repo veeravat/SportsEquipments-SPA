@@ -52,13 +52,13 @@ export class UsersComponent implements OnInit {
   register() {
     console.log(this.model);
     this.authService.register(this.model).subscribe(data => {
-      console.log('logged in Successfully');
+      console.log('Registered');
       this.router.navigateByUrl('/home', {skipLocationChange: true}).then(() =>
       this.router.navigate(['users']));
     }, error => {
-      console.log('failed to login');
-      this.router.navigateByUrl('/home', {skipLocationChange: true}).then(() =>
-      this.router.navigate(['users']));
+      console.log('failed to login' + error);
+      // this.router.navigateByUrl('/home', {skipLocationChange: true}).then(() =>
+      // this.router.navigate(['users']));
     });
   }
 }

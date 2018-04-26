@@ -1,51 +1,60 @@
 <div class="container">
 
-  <div class="panel panel-info mainpanel">
-    <div class="panel-heading">
-      <h3 class="panel-title">Welcome User</h3>
-    </div>
-    <div class="panel-body">
-      <button type="button" (click)="logout()" class="btn btn-danger pull-right">Logout</button>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <table datatable="ng" [dtTrigger]="dtTrigger" width="100%" class="table table-striped table-bordered table-hover">
-            <thead>
-              <tr>
-                <th style="text-align: center;">Equipments</th>
-                <th style="width: 5%;text-align: center;">Left</th>
-                <th style="width: 10%;text-align: center;"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let equipment of equipments">
-                <td>{{equipment.e_name}}</td>
-                <td style="text-align: center">{{equipment.e_amount}}</td>
-                <td style="text-align: center">
-                  <button [disabled]="equipment.e_amount <= 0" (click)="model.E_ID = equipment.e_ID" data-toggle="modal" href='#Resv-Confirm'
-                    type="button" class="btn btn-info btn-sm">Reserve</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    <div class="panel panel-info mainpanel">
+        <div class="panel-heading">
+            <h3 class="panel-title">Welcome User</h3>
         </div>
-      </div>
+        <div class="panel-body">
+            <button type="button" (click)="logout()" class="btn btn-danger pull-right">Logout</button>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table *ngIf="user.reseverd < 1" datatable="ng" [dtTrigger]="dtTrigger" width="100%" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center;">Equipments</th>
+                                <th style="width: 5%;text-align: center;">Left</th>
+                                <th style="width: 10%;text-align: center;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let equipment of equipments">
+                                <td>{{equipment.e_name}}</td>
+                                <td style="text-align: center">{{equipment.e_amount}}</td>
+                                <td style="text-align: center">
+                                    <button [disabled]="equipment.e_amount <= 0" (click)="model.E_ID = equipment.e_ID" data-toggle="modal" href='#Resv-Confirm' type="button" class="btn btn-info btn-sm">Reserve</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div *ngIf="user.reseverd === 1" class="panel panel-warning">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">You have already reseverd</h3>
+                        </div>
+                        <div class="panel-body">
+                            Panel content
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <div class="modal fade" id="Resv-Confirm">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Confirm</h4>
-      </div>
-      <div class="modal-body">
-        <div class="center-block" style="text-align: center">
-          <button type="button" data-dismiss="modal" class="btn btn-success btn-lg" (click)="resv(model.E_ID)">Yes</button>
-          <i class="fa fa-fw fa-pause"></i>
-          <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg">No</button>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Confirm</h4>
+            </div>
+            <div class="modal-body">
+                <div class="center-block" style="text-align: center">
+                    <button type="button" data-dismiss="modal" class="btn btn-success btn-lg" (click)="resv(model.E_ID)">Yes</button>
+                    <i class="fa fa-fw fa-pause"></i>
+                    <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg">No</button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>

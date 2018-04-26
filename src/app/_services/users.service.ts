@@ -27,7 +27,6 @@ export class UsersService {
     } else {
       return false;
     }
-
     });
   }
 }
