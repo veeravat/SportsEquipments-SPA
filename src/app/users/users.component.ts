@@ -3,6 +3,7 @@ import { AuthService } from '../_services/auth.service';
 import { UsersService } from '../_services/users.service';
 import {Router, ActivatedRoute} from '@angular/router';
 import { Subject } from 'rxjs/Subject';
+import { NotifyService } from '../_services/notify.service';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class UsersComponent implements OnInit {
     private usersService: UsersService,
     private route: ActivatedRoute,
     private router: Router,
+    private notifyService: NotifyService
   ) {}
 
   faculty = [
@@ -52,13 +54,13 @@ export class UsersComponent implements OnInit {
   register() {
     console.log(this.model);
     this.authService.register(this.model).subscribe(data => {
-      console.log('Registered');
+      this.notifyService.success('Added new user !!');
       this.router.navigateByUrl('/home', {skipLocationChange: true}).then(() =>
       this.router.navigate(['users']));
     }, error => {
-      console.log('failed to login' + error);
-      // this.router.navigateByUrl('/home', {skipLocationChange: true}).then(() =>
-      // this.router.navigate(['users']));
+      this.notifyService.error('Cannot add this user !!');
+      this.router.navigateByUrl('/home', {skipLocationChange: true}).then(() =>
+      this.router.navigate(['users']));
     });
   }
 }

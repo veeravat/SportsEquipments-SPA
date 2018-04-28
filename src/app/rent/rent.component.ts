@@ -4,6 +4,7 @@ import { EquipmentService } from '../_services/equipment.service';
 import { Subject } from 'rxjs/Subject';
 import {Router, ActivatedRoute} from '@angular/router';
 import { AuthService } from '../_services/auth.service';
+import { NotifyService } from '../_services/notify.service';
 
 @Component({
   selector: 'app-rent',
@@ -27,7 +28,8 @@ export class RentComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private usersService: UsersService,
-    private equipmentService: EquipmentService
+    private equipmentService: EquipmentService,
+    private notifyService: NotifyService
   ) {}
   faculty = [
     'คณะบัญชี',
@@ -80,9 +82,17 @@ export class RentComponent implements OnInit {
         data => {
           if (data) {
             this.user = data;
+            console.log(this.user);
             this.setData(data);
+            if (this.user.rented > 0) {
+              this.notifyService.warning('This user already rented an equipment');
+            }
+            if (this.user.reseverd > 0) {
+              this.notifyService.info('This user already reseverd an equipment');
+            }
           } else {
-            this.SIDText = 'User not found in database please register';
+            this.notifyService.error('User not found in database please register');
+            this.SIDText = ' ';
             this.SIDState = 'has-error';
           }
         },
@@ -97,7 +107,8 @@ export class RentComponent implements OnInit {
   }
 
   setData(data) {
-    this.SIDText = 'Found this user';
+    this.SIDText = ' ';
+    this.notifyService.success('User found !!');
     this.Fullname = data.firstname + ' ' + data.lastname;
     this.dataSent.Rent_by = data.id;
     // console.log(data);
@@ -117,9 +128,11 @@ export class RentComponent implements OnInit {
 
   rent(id: any) {
     // console.log(id);
+    jQuery(window).scrollTop(0);
     this.dataSent.E_ID = id;
     this.equipmentService.rentEquipment(this.dataSent)
     .subscribe(data => {
+      this.notifyService.success('Rented success');
       this.router.navigateByUrl('/home', {skipLocationChange: true}).then(() =>
       this.router.navigate(['rent']));
     }, error => {

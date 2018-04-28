@@ -74,7 +74,7 @@
                                     <td style="vertical-align: middle;">{{equipment.e_name}}</td>
                                     <td style="vertical-align: middle;">{{equipment.e_amount}}</td>
                                     <td style="vertical-align: middle;">
-                                        <button [disabled]="!Fullname || equipment.e_amount <= 0" data-toggle="modal" href='#Rent-Confirm' type="button" class="btn btn-success btn-sm"
+                                        <button [disabled]="!Fullname || equipment.e_amount <= 0 || user.reseverd > 0 || user.rented > 0 " data-toggle="modal" href='#Rent-Confirm' type="button" class="btn btn-success btn-sm"
                                             (click)="rentID = equipment.e_ID">Rent</button>
                                     </td>
                                 </tr>

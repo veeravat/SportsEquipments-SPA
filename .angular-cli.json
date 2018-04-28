@@ -23,7 +23,8 @@
         "../node_modules/font-awesome/css/font-awesome.min.css",
         "../node_modules/metismenu/dist/metisMenu.min.css",
         "../node_modules/datatables.net-bs/css/dataTables.bootstrap.css",
-        "styles.css"
+        "styles.css",
+        "animate.min.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
@@ -31,7 +32,9 @@
         "../node_modules/metismenu/dist/metisMenu.min.js",
         "../node_modules/datatables.net/js/jquery.dataTables.js",
         "../node_modules/datatables.net-bs/js/dataTables.bootstrap.js",
-        "sb-admin-2.min.js"
+        "sb-admin-2.min.js",
+        "bootstrap-notify.min.js",
+        "notify.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

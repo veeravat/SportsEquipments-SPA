@@ -3,6 +3,7 @@ import { Subject } from 'rxjs/Subject';
 import { EquipmentService } from '../_services/equipment.service';
 import { UsersService } from '../_services/users.service';
 import * as jwt_decode from 'jwt-decode';
+import { NotifyService } from '../_services/notify.service';
 import { Router } from '@angular/router';
 @Component({
   // tslint:disable-next-line:component-selector
@@ -31,7 +32,7 @@ export class UserReserveComponent implements OnInit {
     this.userService.getUser(this.decoded.certserialnumber).subscribe(data => {
       this.user = data;
       console.log(data);
-    })
+    });
     this.equipmentService.getEquipments().subscribe(data => {
       this.equipments = data;
       this.dtTrigger.next();
@@ -44,7 +45,7 @@ export class UserReserveComponent implements OnInit {
     // console.log(this.model);
     this.equipmentService.reserv(this.model)
     .subscribe(data => {
-      location.reload();
+      this.user.reseverd = 1;
     }, error => {});
   }
 
@@ -52,7 +53,7 @@ export class UserReserveComponent implements OnInit {
     localStorage.removeItem('token');
     this.router
           .navigateByUrl('/home', { skipLocationChange: true })
-          .then(() => this.router.navigate(['home']));
+          .then(() => this.router.navigate(['login']));
     location.reload();
   }
 }

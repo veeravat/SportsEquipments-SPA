@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, style, transition, animate, keyframes, query, stagger } from '@angular/animations';
 import { Subject } from 'rxjs/Subject';
 import { EquipmentService } from '../_services/equipment.service';
+import { NotifyService } from '../_services/notify.service';
 import {Router, ActivatedRoute} from '@angular/router';
+
 
 @Component({
   selector: 'app-equipments',
@@ -20,7 +22,8 @@ export class EquipmentsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private equipmentService: EquipmentService
+    private equipmentService: EquipmentService,
+    private notifyService: NotifyService
   ) {}
 
   ngOnInit() {
@@ -32,7 +35,7 @@ export class EquipmentsComponent implements OnInit {
     });
   }
   addEquipment() {
-    console.log(this.model);
+    // console.log(this.model);
     this.equipmentService.addEquipment(this.model).subscribe(data => {
       this.router.navigateByUrl('/home', {skipLocationChange: true}).then(() =>
       this.router.navigate(['equipments']));
@@ -44,18 +47,20 @@ export class EquipmentsComponent implements OnInit {
 
   updateEquipment() {
     this.model.e_id = this.modal.E_ID;
-    console.log(this.model);
+    // console.log(this.model);
     this.equipmentService.updateEquipment(this.model).subscribe(data => {
+      this.notifyService.success('Update ' + this.model.e_name);
       this.router.navigateByUrl('/home', {skipLocationChange: true}).then(() =>
       this.router.navigate(['equipments']));
     }, error => {
+      this.notifyService.error('updated');
       this.router.navigateByUrl('/home', {skipLocationChange: true}).then(() =>
       this.router.navigate(['equipments']));
     });
   }
 
   setID(id) {
-    console.log(id);
+    // console.log(id);
     this.modal.header = id.e_name;
     this.modal.total = id.e_total;
     this.modal.E_ID = id.e_ID;

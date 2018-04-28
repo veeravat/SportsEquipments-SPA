@@ -20,7 +20,7 @@ import { RentComponent } from './rent/rent.component';
 import { EquipmentService } from './_services/equipment.service';
 import { EquipInUseComponent } from './EquipInUse/EquipInUse.component';
 import { UserReserveComponent } from './userReserve/userReserve.component';
-
+import { NotifyService } from './_services/notify.service';
 
 
 @NgModule({
@@ -46,7 +46,8 @@ import { UserReserveComponent } from './userReserve/userReserve.component';
   providers: [
     AuthService,
     UsersService,
-    EquipmentService
+    EquipmentService,
+    NotifyService
   ],
   bootstrap: [AppComponent]
 })

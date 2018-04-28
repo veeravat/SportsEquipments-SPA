@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EquipmentService } from '../_services/equipment.service';
 import { Subject } from 'rxjs/Subject';
+import { NotifyService } from '../_services/notify.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -20,7 +21,8 @@ export class EquipInUseComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private equipmentService: EquipmentService
+    private equipmentService: EquipmentService,
+    private notifyService: NotifyService
   ) {}
 
   ngOnInit() {
@@ -36,6 +38,7 @@ export class EquipInUseComponent implements OnInit {
   return() {
     this.equipmentService.return(this.model)
     .subscribe(data => {
+      this.notifyService.success('Return successfully');
       this.router.navigateByUrl('/home', {skipLocationChange: true}).then(() =>
       this.router.navigate(['inuse']));
     }, error => {
